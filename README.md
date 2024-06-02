@@ -6,7 +6,7 @@
 ## 設計脈絡
 * 製作這個加熱平台，我希望可以有個Display，用來顯示目前溫度及按鍵來控制選單 & 調整溫度. 如果用按鍵的話，至少要三個按鍵，這...太佔版面，於是發現有五向按鈕，解決了至少要三個按鍵的問題.但操作上好像沒那麼順暢.於是看到有人使用旋轉編碼器，操作上感覺更直覺.
 * 溫度偵測有PTC & 熱電偶，PTC可量測的溫度大約300 ~ 350度C. K Type 熱電偶可量測的溫度可達1000度C左右，在此選擇 K Type 熱電偶的原因是希望可相容較多的加熱板.
-* 加熱板的控制一般有繼電器 及 SSR. 這裡選用SSR，原因是如果控制較頻繁，也不對聽到嗲嗲的聲音.
+* 加熱板的控制一般有繼電器 及 SSR. 這裡選用SSR，原因是如果控制較頻繁，也不會聽到嗲嗲的聲音.
 
 ## 硬體方面
 * 大腦的核心，我選擇使用Nordic 的 [nRF52840](https://shopee.tw/nRF52840-%E9%96%8B%E7%99%BC%E6%9D%BF-i.26640381.23644275212?sp_atk=af0a1c73-030b-4a82-b1d5-a3a14a383f4f&xptdk=af0a1c73-030b-4a82-b1d5-a3a14a383f4f)，主要是為了讓自己更熟悉這顆晶片，另一方面也是工作上的需求.
@@ -17,12 +17,13 @@
 ## 軟體方面
 * 這整個系統我使用了[Zephyr RTOS](https://www.zephyrproject.org/)來幫我管理，各線程的溝通使用IPC.
 * MAX 6675 及 旋轉編碼器都是使用Zephyr支援的Sensor driver.
-* 顯示的部分則使用開源的[LVGL](https://lvgl.io/)，這部份Zephyr也有整合好了，搭配shield讓你簡單到懷疑人生.UI的部份搭配NXP的[GUI Guider](https://www.nxp.com/design/design-center/software/development-software/gui-guider:GUI-GUIDER).這部也可以使用[SquareLine Studio](https://squareline.io/).
+* 顯示的部分則使用開源的[LVGL](https://lvgl.io/)，這部份Zephyr也有整合好了，搭配shield讓你簡單到懷疑人生.UI的部份搭配NXP的[GUI Guider](https://www.nxp.com/design/design-center/software/development-software/gui-guider:GUI-GUIDER).這部分也可以使用[SquareLine Studio](https://squareline.io/).
+* ncs版本: 2.5.2
 
 ## 實作過程
 ### UI規劃
 * 上電會有開機畫面，開機畫面所呈現icon有Nordic、Zephyr、LVGL、WFEGO，2秒後會進入主選擇.   
-* 主選單的icon有『顯示目前偵測到的溫度及目標溫度』、『設定目標溫度』、『目前溫度戶線圖』、『Info』，可用旋轉編碼器來選擇.
+* 主選單的icon有『顯示目前偵測到的溫度及目標溫度』、『設定目標溫度』、『目前溫度曲線圖』、『Info』，可用旋轉編碼器來選擇.
 * 『顯示目前偵測到的溫度及目標溫度』: 顯示目前max 6675偵測到的溫度，取到小數點第二位.溫度太高或太低可以調整旋轉編碼器來達到目標溫度.
 * 『設定目標溫度』: 預設溫度為150度，如果每次都要180度的話，每次都要去旋轉編碼器很麻煩，這裡使用NVS來記錄設定溫度值.
 * 『目前溫度曲線圖』: 將偵測到的溫度繪製成曲線，由於顯示屏不夠大，顯示效果有限.
