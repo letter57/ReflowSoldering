@@ -39,7 +39,7 @@
 ## [Demo](https://youtu.be/ZhiblBvzqyQ)
 
 ## 結論
-* 如果只是想要加熱什台的話，直接淘寶買一個，因為自己做的話，其實沒有便宜太多，如果要練功的話，我覺得蠻不錯的.
+* 如果只是想要加熱平台的話，直接淘寶買一個，因為自己做的話，其實沒有便宜太多，如果要練功的話，我覺得蠻不錯的.
 * 如果想要使用Zephyr練功的話，非常推薦使用Nordic的晶片.
   * [開發工具齊全](https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop).
   * 有[教學文件](https://academy.nordicsemi.com/).
